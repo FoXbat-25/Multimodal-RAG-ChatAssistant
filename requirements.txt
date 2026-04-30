@@ -1,0 +1,10 @@
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pypdf>=4.0
+openpyxl>=3.1
+sqlglot>=23.0
+
+# Optional OCR fallback for scanned/image PDFs. The system also needs the
+# Tesseract OCR binary installed on the host for pytesseract to work.
+pypdfium2>=4.30
+pytesseract>=0.3

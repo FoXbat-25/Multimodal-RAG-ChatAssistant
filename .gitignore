@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+
+tests/.tmp/
+tests/__pycache__/
+tests/fixtures/documents/test_*.md
+tests/fixtures/spreadsheets/test_*.csv
+
+data/*.db
+data/documents/test_*.md
+data/spreadsheets/test_*.csv
+
+storage/*.json
+storage/*.jsonl
