@@ -7,12 +7,6 @@ tests/__pycache__/
 tests/fixtures/documents/test_*.md
 tests/fixtures/spreadsheets/test_*.csv
 
-data/*.db
-data/documents/*
-data/spreadsheets/*
-!data/documents/.gitkeep
-!data/spreadsheets/.gitkeep
-
 storage/*.json
 storage/*.jsonl
 storage/*.log
