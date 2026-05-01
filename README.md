@@ -2,6 +2,72 @@
 
 This repo contains the first secure boundary for an internal AI analytics assistant. The LLM should call these tools through the gateway, never connect directly to databases, files, PDFs, or spreadsheets.
 
+## Quick Start
+
+1. Clone the repository:
+
+```powershell
+git clone https://github.com/FoXbat-25/Multimodal-RAG-ChatAssistant.git
+cd Multimodal-RAG-ChatAssistant
+```
+
+2. Create a local environment file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+3. Start Docker Desktop.
+
+Make sure Docker Desktop is running before starting the app.
+
+4. Optional: install Ollama models for free local LLM answers and semantic document retrieval:
+
+```powershell
+ollama pull llama3.2:3b
+ollama pull nomic-embed-text
+```
+
+5. Add your private data files:
+
+```text
+data/documents/      PDFs, TXT, and MD files
+data/spreadsheets/   CSV, XLSX, and XLSM files
+data/test_analytics.db
+```
+
+If your SQLite database has a different name, update `DEFAULT_SQLITE_PATH` in `.env`.
+
+6. Build and run the app:
+
+```powershell
+docker compose up --build
+```
+
+7. Open the UI:
+
+```text
+http://127.0.0.1:8000/
+```
+
+8. Build the document index in a second terminal:
+
+```powershell
+docker compose run --rm analytics-assistant python -m analytics_assistant.cli build-doc-index
+```
+
+For a faster smoke test on large PDF folders:
+
+```powershell
+docker compose run --rm analytics-assistant python -m analytics_assistant.cli build-doc-index --max-chunks 25
+```
+
+9. Ask a question in the UI, for example:
+
+```text
+Why did the comedy movie fail?
+```
+
 ## What is included
 
 - `secure_sql_query`: read-only SQL execution against SQLite for the MVP.
