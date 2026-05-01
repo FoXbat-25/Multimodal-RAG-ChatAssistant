@@ -80,6 +80,33 @@ Why did the comedy movie fail?
 - Optional LLM summarizer through OpenAI or local Ollama that turns retrieved evidence into a concise cited answer.
 - `ToolGateway`: the single tool entry point with audit logging and provenance.
 
+## Architecture
+
+```mermaid
+flowchart TD
+    User["User"] --> UI["FastAPI Web UI / REST API"]
+    UI --> Orchestrator["Analytics Orchestrator"]
+    Orchestrator --> Gateway["Tool Gateway"]
+
+    Gateway --> SQLTool["Secure SQL Tool<br/>read-only validation + row limits"]
+    Gateway --> DocTool["Document Retriever<br/>chunks + keyword/semantic search"]
+    Gateway --> SheetTool["Spreadsheet Tool<br/>profile, search, rank, aggregate"]
+
+    SQLTool --> SQLite["SQLite DB"]
+    DocTool --> Docs["PDF / TXT / MD Files"]
+    DocTool --> Index["Document Index + Embeddings"]
+    SheetTool --> Sheets["CSV / XLSX Files"]
+
+    Orchestrator --> Evidence["Evidence Bundle<br/>tool outputs + source metadata"]
+    Evidence --> LLM["Optional LLM Summarizer<br/>Ollama or OpenAI"]
+    LLM --> Answer["Cited Answer<br/>D/S/A source legend"]
+    Evidence --> Answer
+
+    Audit["Audit Log"] --- Gateway
+```
+
+The LLM never reads raw databases, PDFs, or spreadsheets directly. It only receives the controlled evidence returned by backend tools.
+
 ## Data folders
 
 Place files here:
