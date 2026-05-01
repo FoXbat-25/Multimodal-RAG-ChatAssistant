@@ -21,12 +21,24 @@ Copy-Item .env.example .env
 
 Make sure Docker Desktop is running before starting the app.
 
-4. Optional: install Ollama models for free local LLM answers and semantic document retrieval:
+4. Configure an LLM provider.
+
+For free local LLM answers and semantic document retrieval, install Ollama and pull the local models:
 
 ```powershell
 ollama pull llama3.2:3b
 ollama pull nomic-embed-text
 ```
+
+Or use OpenAI by setting these values in `.env`:
+
+```text
+LLM_PROVIDER=openai
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-5.4-mini
+```
+
+If neither OpenAI nor Ollama is configured, the app can still return deterministic tool-based evidence summaries, but LLM-written answers and semantic embedding retrieval will be unavailable.
 
 5. Add your private data files:
 
