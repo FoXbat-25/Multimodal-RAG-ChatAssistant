@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
+.env
 
 tests/.tmp/
 tests/__pycache__/
@@ -7,8 +8,12 @@ tests/fixtures/documents/test_*.md
 tests/fixtures/spreadsheets/test_*.csv
 
 data/*.db
-data/documents/test_*.md
-data/spreadsheets/test_*.csv
+data/documents/*
+data/spreadsheets/*
+!data/documents/.gitkeep
+!data/spreadsheets/.gitkeep
 
 storage/*.json
 storage/*.jsonl
+storage/*.log
+storage/*.db

@@ -1,0 +1,11 @@
+.git
+__pycache__/
+*.py[cod]
+.env
+storage/*.json
+storage/*.jsonl
+storage/*.log
+data/documents/*
+data/spreadsheets/*
+data/*.db
+tests/.tmp/
